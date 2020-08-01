@@ -32,7 +32,7 @@
                   <th>Harga Beli</th>
                   <th>Jenis Satuan</th>
                   <th>Gambar Barang</th>
-                  <th>Aksi</th>
+                  <th colspan="2">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,6 +49,7 @@
                     <td><?php echo $row->jenis_satuan ?></td>
                     <td><img src="<?php echo base_url(); ?>upload/barang/<?php echo $row->gambar_barang;?>" width="50" height="50"></td>
                     <td onClick="javascript: return confirm('Anda yakin hapus?') "><?php echo anchor('barang/hapus/'.$row->idBarang, '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div>')?></td>
+                    <td><?php echo anchor('barang/edit/'.$row->idBarang,'<div class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></div>')?></td>
                 </tr>
 
                  <?php endforeach; ?>

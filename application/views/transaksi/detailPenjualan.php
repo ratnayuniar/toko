@@ -4,7 +4,11 @@ $barang = $this->m_barang->tampil_data();
 echo "<script> var barang = ".json_encode($barang->result()).";</script>";
 ?>
 
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script src="jquery-2.1.4.js"></script>
 <script type="text/javascript">
     $(function(){
         $("#idBarang").change(function(){
@@ -31,7 +35,11 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
         $('#subTotal').val(subTotal);
     }
     function setKembali(){
+        var bayar = $('#bayar').val();
+        localStorage.setItem("bayar", bayar);
+
         var kembali = $('#bayar').val() - $('#sum').val();
+        localStorage.setItem("kembali", kembali);
 
         var number_string = kembali.toString(),
             sisa    = number_string.length % 3,
@@ -130,7 +138,7 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
                 <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
-                    <th>Jumlah</th>s       
+                    <th>Jumlah</th>     
                     <th>Harga</th> 
                    <th>Subtotal</th>
                     <th>Aksi</th>
@@ -163,8 +171,9 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
             </table>
 
             <div class="col-md-5">
-                <form action="<?php echo base_url(). 'detailPenjualan/add'; ?>" class="form-horizontal" role="form">
+                <form action="<?php echo base_url(). 'nota/add'; ?>" method="post" class="form-horizontal" id="tampilan"role="form">
                     <div class="form-group">
+                         <input type="hidden" id="idPenjualan" name="idPenjualan"  value="<?php echo $idPenjualan; ?>">
                         <label class="col-md-3 control-label">Total Harga </label>
                         <div class="col-sm-4">
                          <?php
@@ -175,7 +184,7 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
                         $total = number_format($sum, 0, ',', '.');
                         
                         ?>
-                          <input type="text" class="form-control" id="total" name="total" readonly="" value="<?php echo $total; ?>" >
+                          <input type="number" class="form-control" id="total" name="total" readonly="" value="<?php echo $total; ?>" >
                           <input type="hidden" class="form-control" id="sum" name="sum"  readonly="" value="<?php echo $sum; ?>" >
                         </div>
                     </div>
@@ -183,8 +192,8 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
                     <div class="form-group">
                         <label class="col-md-3 control-label">Bayar </label>
                         <div class="col-sm-4">
-                         
-                          <input type="number" min="0" class="form-control"  onchange="setKembali()" id="bayar" name="bayar">
+                        
+                          <input type="number" min="0" class="form-control"  onchange="setKembali()" id="bayar" name="bayar"  >
                         </div>
                     </div>
                 <div class="form-group">
@@ -192,16 +201,97 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
                         <div class="col-sm-4">
 
                          
-                          <input type="text" class="form-control" readonly="" id="kembali" name="kembali" >
+                          <input type="number" class="form-control" readonly="" id="kembali" name="kembali" >
                         </div>
                     </div>
-                <div class="form-group">
-                        <div class="col-sm-4">
-                          <button type="submit" class="btn btn-block btn-success ">Cetak Nota</button>
-                        </div>
-                </div>        
+                    <button name="alamat" value="berbeda" type="submit" class="btn btn-primary" >Tampilkan Nota</button>       
                 
                 </form>
+
+
+                <div class="row" id="form-tampilan">
+<div class="col-md-6">
+<div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Nota Belanja</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Tanggal Transaksi</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nama Pelanggan</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Total</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">Bayar</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Kembali</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" >
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+                <div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width:55%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="custom-width-modalLabel">Data penjualan</h4>
+            </div>
+        <form action="<?php echo base_url(). 'penjualan/add'; ?>" method="post" class="form-horizontal" role="form">
+            <div class="modal-body">                                   
+                    <div class="form-group">
+                        
+                        <label class="col-md-3 control-label">Tanggal</label>
+                        <div class="col-md-9">
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        
+                        <label class="col-md-3 control-label">Nama Pelanggan</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" required>
+                        </div>
+                    </div> 
+
+                    
+                                  
+                            
+           </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
+            </div>
+        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+                <div class="tampildata">
+                    
+                </div>
+
             </div>           
         </div>
     </div>
@@ -243,6 +333,8 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
         document.getElementById('hargaBeli2').value = hargaBeli;
         document.getElementById('jumlah2').value = jumlah;
         document.getElementById('subTotal2').value = subTotal;
+        document.getElementById('kembali2').value = kembali;
+        document.getElementById('bayar2').value = bayar;
     }
 
     
@@ -253,13 +345,33 @@ echo "<script> var barang = ".json_encode($barang->result()).";</script>";
 
 <script>
 $(document).ready(function(){
-$("#form-input").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
-$(".selectpicker").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
-if ($("input[name='idBarang']:checked").val() == "'.$row->idBarang.'" ) { //Jika radio button "berbeda" dipilih maka tampilkan form-inputan
-$("#form-input").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
+$("#form-tampilan").css("display","none"); //Menghilangkan form-input ketika pertama kali dijalankan
+$(".detail").click(function(){ //Memberikan even ketika class detail di klik (class detail ialah class radio button)
+if ($("input[name='alamat']:checked").val() == "berbeda" ) { //Jika radio button "berbeda" dipilih maka tampilkan form-inputan
+$("#form-tampilan").slideDown("fast"); //Efek Slide Down (Menampilkan Form Input)
 } else {
-$("#form-input").slideUp("fast"); //Efek Slide Up (Menghilangkan Form Input)
+$("#form-tampilan").slideUp("fast"); //Efek Slide Up (Menghilangkan Form Input)
 }
 });
 });
 </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".tombol-simpan").click(function(){
+            var data = $('.form-user').serialize();
+            $.ajax({
+                type:'POST',
+                url:"<?php echo base_url(). 'm_detailPenjualan/tambah_data'; ?>",
+                data:data,
+                success:function(data){
+                  console.log(data)
+                  $('#tampildata').html(data);
+                }
+            });
+        });
+    });
+</script>
+
+

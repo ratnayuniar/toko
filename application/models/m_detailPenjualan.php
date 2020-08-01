@@ -1,5 +1,6 @@
 <?php
 class M_detailpenjualan extends CI_Model {
+    
     function tampil_data($idPenjualan) {
         return $this->db->query("SELECT * FROM barang, penjualan, detailpenjualan 
             WHERE barang.idBarang=detailpenjualan.idBarang AND 

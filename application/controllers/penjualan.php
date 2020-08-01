@@ -23,6 +23,11 @@ class Penjualan extends CI_Controller {
         $this->m_penjualan->tambah_data();   
 	}
 
+	public function add_nota(){
+		 $idPenjualan = $this->input->post('idPenjualan');
+        $this->m_penjualan->tambah_nota();   
+	}
+
 	public function delete(){
 		$idPenjualan= $this->input->post('idPenjualan2');
 		$this->m_penjualan->hapus_data($idPenjualan);

@@ -1,10 +1,10 @@
 <?php
 class M_pembelian extends CI_Model{
+	
 	function tampil_data(){
 		return $this->db->query("SELECT * FROM pembelian");
 	}
 
-	
 
 	function tambah_data(){
 		$data = array(

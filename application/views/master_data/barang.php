@@ -1,5 +1,5 @@
                 <!-- Page-Title -->
-                <div class="row">
+                <div class="row"> 
                     <div class="col-sm-12">
                         <div class="card-box table-responsive">
                             <h4 class="m-t-0 header-title m-b-30"><b>Data Barang</b></h4>

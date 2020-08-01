@@ -1,5 +1,5 @@
 <?php
-class M_penjualan extends CI_Model{
+class M_penjualan extends CI_Model{ 
 	function tampil_data(){
 		return $this->db->query("SELECT * FROM penjualan");
 	}
@@ -8,15 +8,29 @@ class M_penjualan extends CI_Model{
 		$data = array(
 			'tanggal' => $this->input->post('tanggal'),
 			'nama_pelanggan' => $this->input->post('nama_pelanggan'),
+			'bayar' => $this->input->post('bayar'),
+			'kembali' => $this->input->post('kembali')
 		);
 		$this->db->insert('penjualan', $data);
 		redirect('../penjualan');
+	}
+
+	function tambah_nota(){
+		$data = array(
+			'total' => $this->input->post('total'),
+			'bayar' => $this->input->post('bayar'),
+			'kembali' => $this->input->post('kembali')
+		);
+		$this->db->insert('penjualan', $data);
+		redirect('../detailPenjualan');
 	}
 
 	function ubah_data ($idPenjualan){
 		$data = array(
 			'tanggal' => $this->input->post('tanggal'),
 			'nama_pelanggan' => $this->input->post('nama_pelanggan'),
+			'bayar' => $this->input->post('bayar'),
+			'kembali' => $this->input->post('kembali')
 		   );
 			$this->db->where(array('idPenjualan'=> $idPenjualan));
 			$this->db->update('penjualan',$data);

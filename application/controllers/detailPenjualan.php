@@ -28,5 +28,9 @@ class detailPenjualan extends CI_Controller {
 		$idDetail= $this->input->post('idDetail2');
 		$this->m_detailPenjualan->hapus_data($idDetail);
 	}
+
+	public function tambah(){
+		$this->m_detailPenjualan->tambah_data2();
+	}
 }
 ?>

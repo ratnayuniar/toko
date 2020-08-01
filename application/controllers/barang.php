@@ -18,21 +18,6 @@ class Barang extends CI_Controller {
  
     }
 
-  /*  public function add() {
-        $idBarang = $this->input->post('namaBarang');
-
-        $query = $this->m_barang->cek_galeri($idBarang)->num_rows();
-        if (empty($query))
-            $this->m_barang->tambah_data();
-        else
-            $this->m_barang->ubah_data($idBarang);
-    }
-
-    public function delete(){ 
-        $idBarang = $this->input->post('idBarang2');
-                     $this->m_barang->hapus_data($idBarang);
-    }*/
-
     public function tambah_aksi(){
         $namaBarang   =$this->input->post('namaBarang');
         $stokBarang   =$this->input->post('stokBarang');
@@ -71,30 +56,32 @@ class Barang extends CI_Controller {
         redirect('barang/index');
     }
 
-    /*public function edit($idBarang){
+    public function edit($idBarang){
         $where= array('idBarang' =>$idBarang);
         $data['barang'] = $this->m_barang->edit_data($where,'barang')->result();
         $this->load->view('header');
-        $this->load->view('v_admin/edit_galeri',$data);
-        $this->load->view('v_admin/footerAdmin');
+        $this->load->view('master_data/edit_barang',$data);
+        $this->load->view('footer');
 
     }
 
     public function update(){
         $idBarang= $this->input->post('idBarang');
         $namaBarang= $this->input->post('namaBarang');
-        $gambar_barang= $this->input->post('gambar_barang');
+        $stokBarang= $this->input->post('stokBarang');
+        $hargaBeli= $this->input->post('hargaBeli');
 
         $data=array(
             'namaBarang' =>$namaBarang,
-            'gambar_barang' =>$gambar_barang
+            'stokBarang' =>$stokBarang,
+            'hargaBeli' =>$hargaBeli
 
         );
         $where=array(
             'idBarang'=>$idBarang
         );
 
-        $this->m_barang->update_data($where,$data,'galeri');
-        redirect('galeri/index');
-    }*/
+        $this->m_barang->update_data($where,$data,'barang');
+        redirect('barang/index');
+    }
 }

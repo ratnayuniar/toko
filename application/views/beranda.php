@@ -24,7 +24,7 @@
         <div class="row">
                                       
                    <?php
-                    $barang = $this->db->query("SELECT * FROM barang WHERE stokBarang <='5'");
+                    $barang = $this->db->query("SELECT * FROM barang ");
                     $no = $barang->num_rows();
                     if($no>0){
                         foreach($barang->result() as $row){
