@@ -5,7 +5,6 @@ class Pembelian extends CI_Controller {
     function __construct(){
         parent::__construct();      
             $this->load->model('m_pembelian');
-            $this->load->model('m_pegawai');
             $this->load->helper('url');
             $this->load->helper('tanggal_helper');
     }

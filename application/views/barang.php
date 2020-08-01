@@ -83,28 +83,36 @@
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="namaBarang" name="namaBarang" required>
                         </div>
-                </div> 
+                </div><br><br>
 
                  <div class="form-group">
                     <label class="col-md-3 control-label">Jumlah</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="stokBarang" name="stokBarang" required>
                         </div>
-                </div> 
+                </div> <br><br>
 
                  <div class="form-group">
                     <label class="col-md-3 control-label">Harga Jual</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="hargaJual" name="hargaJual" required>
                         </div>
-                </div>
+                </div><br><br>
+
                 <div class="form-group">
                     <label class="col-md-3 control-label">Harga Beli</label>
                         <div class="col-md-9">
                             <input type="text" class="form-control" id="hargaBeli" name="hargaBeli" required>
                         </div>
                 </div> 
-                <br><br>                                   
+                <br><br> 
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Jenis Satuan</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="jenis_satuan" name="jenis_satuan" required>
+                        </div>
+                </div><br><br>
+                                                  
                 <div class="form-group">
                     <label class="col-md-3 control-label">Gambar Galeri</label>
                         <div class="col-md-9">

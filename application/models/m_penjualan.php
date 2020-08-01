@@ -7,9 +7,7 @@ class M_penjualan extends CI_Model{
 	function tambah_data(){
 		$data = array(
 			'tanggal' => $this->input->post('tanggal'),
-			'nama_pelanggan' => $this->input->post('nama_pelanggan'),
-			'bayar' => $this->input->post('bayar'),
-			'kembali' => $this->input->post('kembali')
+			'nama_pelanggan' => $this->input->post('nama_pelanggan')
 		);
 		$this->db->insert('penjualan', $data);
 		redirect('../penjualan');

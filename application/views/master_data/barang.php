@@ -1,16 +1,14 @@
-                <!-- Page-Title -->
-                <div class="row"> 
-                    <div class="col-sm-12">
-                        <div class="card-box table-responsive">
-                            <h4 class="m-t-0 header-title m-b-30"><b>Data Barang</b></h4>
+    <!-- Page-Title -->
+    <div class="row"> 
+        <div class="col-sm-12">
+            <div class="card-box table-responsive">
+                <h4 class="m-t-0 header-title m-b-30"><b>Data Barang</b></h4>
+                        <div style="width:100%; text-align:right; margin-bottom:10px;">
+                            <a href="#" class="on-default edit-row btn btn-success" data-toggle="modal" data-target="#custom-width-modal"><i class="fa fa-plus"></i></a>
+                        </div>
 
-                           <div style="width:100%; text-align:right; margin-bottom:10px;">
-                                <a href="#" class="on-default edit-row btn btn-success" data-toggle="modal" data-target="#custom-width-modal"><i class="fa fa-plus"></i></a>
-
-                            </div>
-
-                            <table id="datatable" class="table table-striped table-bordered">
-                                <thead>
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Barang</th>
@@ -20,34 +18,29 @@
                                     <th>Stok</th>
                                     <th>Aksi</th>
                                 </tr>
-                                </thead>
+                            </thead>
 
-
-                               <tbody>
+                            <tbody>
                                 <?php 
                                     $no = 1;
                                     foreach($query->result() as $row){
                                 echo "<tr>
                                 <td>".$no."</td>
-                                
                                 <td>".$row->namaBarang."</td>
                                 <td>".$row->hargaBeli."</td>
                                 <td>".$row->hargaJual."</td>
                                 <td>".$row->diskon."</td>
                                 <td>".$row->stokBarang."</td>
                                 <td><a href ='#' class ='on-default edit-row btn btn-primary' data-toggle='modal' data-target='#custom-width-modal' onClick=\"SetInput('".$row->idJenis."', '".$row->idMerk."', '".$row->idBarang."','".$row->namaBarang."','".$row->hargaBeli."','".$row->hargaJual."','".$row->diskon."','".$row->stokBarang."')\"><i class ='fa fa-pencil'></i></a>
-                                    
                                     <a href ='#' class ='on-default remove-row btn btn-danger' data-toggle='modal' data-target='#delete-modal'onClick=\"SetInputs('".$row->idJenis."', '".$row->idMerk."', '".$row->idBarang."','".$row->namaBarang."','".$row->hargaBeli."','".$row->hargaJual."', '".$row->diskon."','".$row->stokBarang."')\"><i class ='fa fa-trash'></i></a>
                                 </td>
-                            
-                                
                             </tr>";
                             $no++;
                                     
                             } 
                             ?>
-                                </tbody>
-                            </table>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>
@@ -60,58 +53,58 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="custom-width-modalLabel">Data Barang</h4>
             </div>
-        <form action="<?php echo base_url(). 'barang/add'; ?>" method="post" class="form-horizontal" role="form">
+            <form action="<?php echo base_url(). 'barang/add'; ?>" method="post" class="form-horizontal" role="form">
             <div class="modal-body">                                   
-                    <div class="form-group">
-                        <input type="hidden" id="idBarang" name="idBarang">
-                        <label class="col-md-3 control-label">Nama Barang</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="namaBarang" name="namaBarang" required>
-                        </div>
-                    </div>     
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis</label>
-                        <div class="col-md-4">
-                            <select class="selectpicker" data-live-search="true"  data-style="btn-white" id="idJenis" name="idJenis" required>
+                <div class="form-group">
+                    <input type="hidden" id="idBarang" name="idBarang">
+                    <label class="col-md-3 control-label">Nama Barang</label>
+                    <div class="col-md-9">
+                    <input type="text" class="form-control" id="namaBarang" name="namaBarang" required>
+                    </div>
+                </div>     
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Jenis</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker" data-live-search="true"  data-style="btn-white" id="idJenis" name="idJenis" required>
                             <?php
                             $query = $this->m_jenis->tampil_data();
                             foreach($query->result() as $row) {
                                 echo "<option value='".$row->idJenis."'>".$row->namaJenis."</option>";
                             }
                             ?>
-                            </select>
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Merk</label>
-                        <div class="col-md-4">
-                            <select class="selectpicker" data-live-search="true"  data-style="btn-white" id="idMerk" name="idMerk" required>
+                        </select>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Merk</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker" data-live-search="true"  data-style="btn-white" id="idMerk" name="idMerk" required>
                             <?php
                             $query = $this->m_merk->tampil_data();
                             foreach($query->result() as $row) {
                                 echo "<option value='".$row->idMerk."'>".$row->namaMerk."</option>";
                             }
                             ?>
-                            </select>
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Harga Beli</label>
-                        <div class="col-md-4">
-                            <input type="number" min="0" class="form-control" style="text-align: right;" id="hargaBeli" name="hargaBeli" required>
-                        </div>
-                    </div>     
-                     <div class="form-group">
-                        <label class="col-md-3 control-label">Harga Jual</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="hargaJual" name="hargaJual" required>
-                        </div>
-                    </div>    
-                     <div class="form-group">
-                        <label class="col-md-3 control-label">Diskon</label>
-                        <div class="col-md-4">
-                            <input type="number" min="1" class="form-control" id="diskon" name="diskon" required>
-                        </div>
+                        </select>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Harga Beli</label>
+                    <div class="col-md-4">
+                        <input type="number" min="0" class="form-control" style="text-align: right;" id="hargaBeli" name="hargaBeli" required>
+                    </div>
+                </div>     
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Harga Jual</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" id="hargaJual" name="hargaJual" required>
+                    </div>
+                </div>    
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Diskon</label>
+                    <div class="col-md-4">
+                        <input type="number" min="1" class="form-control" id="diskon" name="diskon" required>
+                    </div>
                         <label class="col-md-3 control-label" style="text-align: left;">%</label>
                     </div>   
                              

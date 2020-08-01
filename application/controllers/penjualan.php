@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Penjualan extends CI_Controller {
 	function __construct(){
 		parent::__construct();
-		$this->load->model('m_pegawai');
 		$this->load->model('m_penjualan');
 		$this->load->helper('tanggal_helper');
 		$this->load->helper('url');
